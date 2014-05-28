@@ -3,8 +3,9 @@
 
 #include <iostream>
 #include <fstream>
+#include <sstream>
 
-#define SYSFS_GPIO_DIR = "/sys/class/gpio"
+const std::string SYSFS_GPIO_DIR = "/sys/class/gpio";
 
 class CGpio
 {
@@ -23,6 +24,6 @@ class CGpio
     int getValue(void);
     int getId(void);
     //TODO: poll()
-}
+};
 
 #endif

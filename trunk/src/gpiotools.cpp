@@ -6,14 +6,16 @@ CGpio::CGpio(int num)
   this->id=num;
 }
 
-CGpio::~gpio()
+CGpio::~CGpio()
 {
 }
 
 int CGpio::open(void)
 {
   //Export pin
-  ofstream gpioFile(SYSFS_GPIO_DIR "/export");
+  std::stringstream filename;
+  filename << SYSFS_GPIO_DIR << "/export";
+  std::ofstream gpioFile(filename.str().c_str());
   if (gpioFile.is_open())
   {
     gpioFile << this->id;
@@ -30,7 +32,9 @@ int CGpio::open(void)
 int CGpio::close(void)
 {
   //Unexport pin
-  ofstream gpioFile(SYSFS_GPIO_DIR "/unexport");
+  std::stringstream filename;
+  filename << SYSFS_GPIO_DIR << "/unexport";
+  std::ofstream gpioFile(filename.str().c_str());
   if (gpioFile.is_open())
   {
     gpioFile << this->id;
@@ -47,9 +51,9 @@ int CGpio::close(void)
 int CGpio::setEdge(std::string edge)
 {
   //Set pin edge
-  sstream filename;
+  std::stringstream filename;
   filename << SYSFS_GPIO_DIR << "/gpio" << this->id;
-  ofstream gpioFile(filename.str());
+  std::ofstream gpioFile(filename.str().c_str());
   if (gpioFile.is_open())
   {
     gpioFile << edge;
@@ -66,9 +70,9 @@ int CGpio::setEdge(std::string edge)
 int CGpio::setDirection(std::string dir)
 {
   //Set pin direction
-  sstream filename;
+  std::stringstream filename;
   filename << SYSFS_GPIO_DIR << "/gpio" << this->id;
-  ofstream gpioFile(filename.str());
+  std::ofstream gpioFile(filename.str().c_str());
   if (gpioFile.is_open())
   {
     gpioFile << dir;
@@ -85,9 +89,9 @@ int CGpio::setDirection(std::string dir)
 int CGpio::setValue(int value)
 {
   //Set pin direction
-  sstream filename;
+  std::stringstream filename;
   filename << SYSFS_GPIO_DIR << "/gpio" << this->id;
-  ofstream gpioFile(filename.str());
+  std::ofstream gpioFile(filename.str().c_str());
   if (gpioFile.is_open())
   {
     gpioFile << value;
@@ -103,8 +107,10 @@ int CGpio::setValue(int value)
 
 int CGpio::getValue(void)
 {
+  return 0;
 }
 
 int CGpio::getId(void)
 {
+  return 0;
 }
